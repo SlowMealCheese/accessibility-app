@@ -8,7 +8,7 @@ from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from helpers import apology
+from helpers import apology, search
 
 # Configure application
 app = Flask(__name__)
@@ -48,14 +48,12 @@ def close_connection(exception):
 
 # Routes
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template('index.html');
-
-
-@app.route("/search", methods=["GET"])
-def check():
-    return apology("TODO")
+	if request.method=="GET":
+		return render_template('index.html');
+	else:
+		return search(request.form.get('searchAddress'));
 
 @app.route("/report", methods=["GET"])
 def report():
