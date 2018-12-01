@@ -47,10 +47,16 @@ def index():
 def check():
     return apology("TODO")
 
+@app.route("/report", methods=["GET"])
+def report():
+	userType = request.args.get('userType')
+	return render_template('report.html')
+	
+
 def errorhandler(e):
     """Handle error"""
     return apology(e.name, e.code)
 
 # listen for errors
-for code in default_exceptions:
-    app.errorhandler(code)(errorhandler)
+#for code in default_exceptions:
+#    app.errorhandler(code)(errorhandler)
