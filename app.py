@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, g
-# from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 import sqlite3
 from tempfile import mkdtemp
@@ -10,14 +9,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
 from helpers import apology
-
-
-# from database import db_session, init_db
-# from models import Place
-
-# @app.teardown_appcontext
-# def shutdown_session(exception=None):
-#    db_session.remove()
 
 # Configure application
 app = Flask(__name__)
@@ -33,8 +24,6 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
-
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
@@ -43,7 +32,6 @@ Session(app)
 
 
 # Set up database
-
 DATABASE = 'places.db'
 
 def get_db():
