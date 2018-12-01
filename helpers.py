@@ -21,21 +21,21 @@ def apology(message, code=400):
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
 def search(searchAddress):
-	searchWords= searchAddress.split()
-	searchQuery = ''
-	for word in searchWords:
-		searchQuery = searchQuery+word+ '+'
-	searchQuery = searchQuery[:-1]
+    searchWords= searchAddress.split()
+    searchQuery = ''
+    for word in searchWords:
+        searchQuery = searchQuery+word+ '+'
+    searchQuery = searchQuery[:-1]
 
-	if len(searchQuery)==0:
-		return render_template('index.html')
-	return render_template('searched.html', places = buildPlaces(searchQuery), key=constants.KEY, query=searchQuery)
-	
+    if len(searchQuery)==0:
+        return render_template('index.html')
+    return render_template('searched.html', places = buildPlaces(searchQuery), key=constants.KEY, query=searchQuery)
+    
 def buildPlaces(query):
-	requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + constants.KEY
-	results = requests.get(requestURL).json()["results"]
-	placeList = list()
-	for result in results:
-		placeList.append({"name":result["name"], "address":result["formatted_address"]})
+    requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + constants.KEY
+    results = requests.get(requestURL).json()["results"]
+    placeList = list()
+    for result in results:
+        placeList.append({"name":result["name"], "address":result["formatted_address"]})
 
-	return placeList
+    return placeList
