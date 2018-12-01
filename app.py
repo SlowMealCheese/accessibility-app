@@ -80,7 +80,9 @@ def report():
         userType = request.args.get('userType')
         return render_template('report.html')
     else:
-        query_db('INSERT INTO places VALUES (?, ?)', (request.form.get("placeid"), request.form.get("wheelchair")))
+        query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
+                 (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
+                  request.form.get("door_width"), request.form.get("table_height")))
         return redirect("/")
     
 

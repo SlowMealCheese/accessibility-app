@@ -7,12 +7,18 @@
 {% block main %}
     <form action="/report" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="placeid" placeholder="Symbol" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="place_id" placeholder="Place ID" type="text">
             <select name="wheelchair">
-            	<option value="1">Accessible</option>
-            	<option value="0">Inaccessible</option>
+                <option value="1">Wheelchair-accessible</option>
+                <option value="0">Wheelchair-inaccessible</option>
             </select>
+            <select name="bathroom_access">
+                <option value="1">Accessible bathrooms</option>
+                <option value="0">Inaccessible bathrooms</option>
+            </select>
+            <input autocomplete="off" autofocus class="form-control" name="door_width" placeholder="Accessible door width (inches)" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="table_height" placeholder="Accessible table height (inches)" type="text">
         </div>
-        <button class="btn btn-primary" type="submit">Quote</button>
+        <button class="btn btn-primary" type="submit">Report</button>
     </form>
 {% endblock %}
