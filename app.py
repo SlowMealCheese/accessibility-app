@@ -35,8 +35,10 @@ Session(app)
 # Set up database
 DATABASE = 'places.db'
 
-def get_db():
+def query_db(query, args=()):
+
     db = getattr(g, '_database', None)
+    
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
 
@@ -45,11 +47,12 @@ def get_db():
                     for idx, value in enumerate(row))
         
     db.row_factory = make_dicts
-    return db
 
-def query_db(query, args=()):
-    cur = get_db().execute(query, args)
+    cur = db.execute(query, args)
+
     rv = cur.fetchall()
+
+    db.commit()
     cur.close()
     return rv
 
@@ -65,16 +68,20 @@ def close_connection(exception):
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method=="GET":
-        Places = query_db('select * from places')
+        Places = query_db('SELECT * FROM places')
         return render_template('index.html', Places=Places, KEY=KEY);
 
     else:
         return search(request.form.get('searchAddress'));
 
-@app.route("/report", methods=["GET"])
+@app.route("/report", methods=["GET", "POST"])
 def report():
-    userType = request.args.get('userType')
-    return render_template('report.html')
+    if request.method=="GET":
+        userType = request.args.get('userType')
+        return render_template('report.html')
+    else:
+        query_db('INSERT INTO places VALUES (?, ?)', (request.form.get("placeid"), request.form.get("wheelchair")))
+        return redirect("/")
     
 
 def errorhandler(e):

@@ -7,7 +7,11 @@
 {% block main %}
     <form action="/report" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="placeid" placeholder="Symbol" type="text">
+            <select name="wheelchair">
+            	<option value="1">Accessible</option>
+            	<option value="0">Inaccessible</option>
+            </select>
         </div>
         <button class="btn btn-primary" type="submit">Quote</button>
     </form>
