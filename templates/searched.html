@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends "layout.html" %}
 
 {% block title %}
@@ -6,20 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>
-{% endblock %}
-=======
-{% extends "layout.html" %}
-
-{% block title %}
-    Results
-{% endblock %}
-
-{% block main %}
+    <!--<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>-->
 	{% for place in places %}
-		<div class="well well-sm">
+		<div>
 		{{ place["name"] }}
+		{{ place["address"] }}
 		</div>
 	{% endfor %}
 {% endblock %}
->>>>>>> 4ef0cca5ece2f37f238ad26d5c26b2f3a4e33c73

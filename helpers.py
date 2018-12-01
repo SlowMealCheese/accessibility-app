@@ -36,6 +36,6 @@ def buildPlaces(query):
 	results = requests.get(requestURL).json()["results"]
 	placeList = list()
 	for result in results:
-		placeList.append({"name":result["name"], "address":result["formatted_address"], "icon":result["icon"]})
+		placeList.append({"name":result["name"], "address":result["formatted_address"]})
 
 	return placeList

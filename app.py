@@ -74,6 +74,7 @@ def index():
     else:
         return search(request.form.get('searchAddress'));
 
+
 @app.route("/report", methods=["GET", "POST"])
 def report():
     if request.method=="GET":
@@ -84,10 +85,6 @@ def report():
                  (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
                   request.form.get("door_width"), request.form.get("table_height")))
         return redirect("/")
-    
-@app.route("/mission", methods=["GET", "POST"])
-def mission():
-    return render_template('mission.html')
 
 def errorhandler(e):
     """Handle error"""
@@ -96,4 +93,3 @@ def errorhandler(e):
 # listen for errors
 #for code in default_exceptions:
 #    app.errorhandler(code)(errorhandler)
-
