@@ -77,7 +77,7 @@ def report():
         userType = request.args.get('userType')
         return render_template('report.html')
     else:
-        query_db('INSERT INTO places (place_id, wheelchair) VALUES (%s, %d)' % (request.form["placeid"], int(request.form["wheelchair"])))
+        query_db('INSERT INTO places (place_id, wheelchair) VALUES (%s, %d)' % [request.form.get("placeid"), int(request.form.get("wheelchair"))])
         return render_template('index.html')
     
 
