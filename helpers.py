@@ -25,4 +25,6 @@ def search(searchAddress):
 	for word in searchWords:
 		searchQuery = searchQuery+word+ '+'
 	searchQuery = searchQuery[:-1]
+	if len(searchQuery)==0:
+		return render_template('index.html')
 	return render_template('searched.html', key=constants.KEY, query = searchQuery)
