@@ -39,10 +39,9 @@ def search(searchAddress):
 
 def getPlaceIDs(lat, lng, query):
 	requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + constants.KEY
+	relevantType = requests.get(requestURL).json()["results"][0]["types"][0]
 
-	
-
-	requestURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(lat) + "," + str(lng) + "&radius=2000&key=" + constants.KEY
+	requestURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(lat) + "," + str(lng) + "&radius=2000&type=" + relevantType + "&key=" + constants.KEY
 	results = requests.get(requestURL).json()["results"]
 	
 	placeIDs = list()
