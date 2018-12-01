@@ -43,55 +43,9 @@ def index():
     return render_template('index.html');
 
 
-@app.route("/check", methods=["GET"])
+@app.route("/search", methods=["GET"])
 def check():
     return apology("TODO")
-
-
-@app.route("/history")
-def history():
-    return apology("TODO")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    return apology("TODO")
-
-
-@app.route("/logout")
-def logout():
-    return apology("TODO")
-
-
-@app.route("/quote", methods=["GET", "POST"])
-def quote():
-    if request.method == "POST":
-        # Get stock info and handle error if invalid symbol
-        iexQuote = lookup(request.form.get('symbol').strip())
-        if not iexQuote:
-            return apology('Please provide valid stock symbol')
-            # Build string to send to template with stock info
-        newQuote = "A share of " + iexQuote["name"] + " (" + iexQuote["symbol"] + ") costs $" + str(iexQuote["price"])
-        return render_template('quoted.html', quote=newQuote)
-    else:
-        return render_template('quote.html')
-    return apology("TODO")
-
-
-@app.route("/changepassword", methods=["GET", "POST"])
-def changepassword():
-    return apology("TODO")
-
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    return apology("TODO")
-
-
-@app.route("/sell", methods=["GET", "POST"])
-def sell():
-    return apology("TODO")
-
 
 def errorhandler(e):
     """Handle error"""
