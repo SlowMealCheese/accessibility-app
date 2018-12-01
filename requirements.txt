@@ -1,3 +1,5 @@
 Flask
 Flask-Session
 requests
+json
+sqlite3

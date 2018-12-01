@@ -2,7 +2,6 @@ import requests
 import urllib.parse
 import constants
 import json
-import requests
 
 from flask import redirect, render_template, request, session
 from functools import wraps
