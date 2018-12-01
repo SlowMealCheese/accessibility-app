@@ -6,8 +6,11 @@
 
 {% block main %}
 	{% for place in places %}
-		<div class="well well-sm">
+		<div>
 		{{ place["name"] }}
+		{{ place["address"] }}
 		</div>
 	{% endfor %}
+
+	
 {% endblock %}
