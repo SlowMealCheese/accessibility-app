@@ -69,14 +69,11 @@ def close_connection(exception):
 def index():
     if request.method=="GET":
         Places = query_db('SELECT * FROM places')
-        return render_template('index.html', Places=Places, KEY=KEY)
+        return render_template('index.html', Places=Places, KEY=KEY);
 
     else:
-        return search(request.form.get('searchAddress'))
+        return search(request.form.get('searchAddress'));
 
-@app.route("/mission", methods=["GET", "POST"])
-def mission():
-    return render_template('mission.html')
 
 @app.route("/report", methods=["GET", "POST"])
 def report():
@@ -84,9 +81,10 @@ def report():
         userType = request.args.get('userType')
         return render_template('report.html')
     else:
-        query_db('INSERT INTO places VALUES (?, ?)', (request.form.get("placeid"), request.form.get("wheelchair")))
+        query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
+                 (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
+                  request.form.get("door_width"), request.form.get("table_height")))
         return redirect("/")
-    
 
 def errorhandler(e):
     """Handle error"""
