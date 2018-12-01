@@ -6,14 +6,28 @@
 
 {% block main %}
     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>
+
+	{% set count = 1 %}
 	{% for place in places %}
 		<div>
 		{{ place["name"] }}
 		{{ place["address"] }}
+		<details onclick= getDetails({{count}}, {{place["placeid"]}}, {{ key }})>
+		<summary>Open Now {{ place["open"] }}</summary>
+		<p id="hours{{count}}"></p>
+		</details>
 		</div>
+	{% set count = count + 1 %}
 	{% endfor %}
 	
 	<script>
-
+		function getDetails(count, id, key)
+		{
+			var requestURL="https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&key=" + key;
+			$.get(requestURL, function(details) {
+				var docId = 'hours' + count.toString();
+				document.getElementById(docId).innerText = details;
+			});
+		}
 	</script>
 {% endblock %}
