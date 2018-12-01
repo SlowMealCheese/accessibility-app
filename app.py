@@ -9,6 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
 from helpers import apology, search
+from constants import KEY
 
 
 # Configure application
@@ -65,7 +66,7 @@ def close_connection(exception):
 def index():
     if request.method=="GET":
         Places = query_db('select * from places')
-        return render_template('index.html', Places=Places);
+        return render_template('index.html', Places=Places, KEY=KEY);
 
     else:
         return search(request.form.get('searchAddress'));

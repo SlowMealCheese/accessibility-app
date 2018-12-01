@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
         <title>Accessibility Check: {% block title %}{% endblock %}</title>
 
@@ -27,39 +28,44 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand">Accessibility Check</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+            <a class="navbar-brand">Accessibility Check</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Report Accessibility Information
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/report?userType=business">Business Owner</a>
-						<a class="dropdown-item" href="/report?userType=customer">Customer</a>
-					<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Refute Claim</a>
-					</div>
-				</li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0" action='/' method="POST">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search Address" aria-label="Search" name='searchAddress'>
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
-		  </div>
-		</nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Report Accessibility Information
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/report?userType=business">Business Owner</a>
+                        <a class="dropdown-item" href="/report?userType=customer">Customer</a>
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Refute Claim</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action='/' method="POST">
+                <input id="mapsearch" class="form-control mr-sm-2" type="text" placeholder="Search Address" aria-label="Search" name='searchAddress'>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
 
         <main class="container p-5">
             {% block main %}{% endblock %}
         </main>
 
     </body>
+
+    <script>
+        var input = document.getElementById('mapsearch');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    </script>
 
 </html>
