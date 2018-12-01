@@ -51,3 +51,4 @@ def getPlaceIDs(lat, lng, query):
 		placeIDs.append(result["place_id"])
 
 	return placeIDs
+	
