@@ -35,8 +35,10 @@ Session(app)
 # Set up database
 DATABASE = 'places.db'
 
-def get_db():
+def query_db(query, args=()):
+
     db = getattr(g, '_database', None)
+    
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
 
@@ -45,11 +47,12 @@ def get_db():
                     for idx, value in enumerate(row))
         
     db.row_factory = make_dicts
-    return db
 
-def query_db(query, args=()):
-    cur = get_db().execute(query, args)
+    cur = db.execute(query, args)
+
     rv = cur.fetchall()
+
+    db.commit()
     cur.close()
     return rv
 
@@ -77,8 +80,8 @@ def report():
         userType = request.args.get('userType')
         return render_template('report.html')
     else:
-        query_db('INSERT INTO places (place_id, wheelchair) VALUES (%s, %d)' % [request.form.get("placeid"), int(request.form.get("wheelchair"))])
-        return render_template('index.html')
+        query_db('INSERT INTO places VALUES (?, ?)', (request.form.get("placeid"), request.form.get("wheelchair")))
+        return redirect("/")
     
 
 def errorhandler(e):
