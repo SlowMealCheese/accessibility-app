@@ -1,6 +1,5 @@
 import os
 
-# from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 # from flaskext.mysql import MySQL
 from flask_session import Session
@@ -39,16 +38,9 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-# Routes
-
 @app.route("/")
 def index():
-    return apology("TODO")
-
-
-@app.route("/buy", methods=["GET", "POST"])
-def buy():
-    return apology("TODO")
+    return render_template('index.html');
 
 
 @app.route("/check", methods=["GET"])
@@ -104,7 +96,6 @@ def sell():
 def errorhandler(e):
     """Handle error"""
     return apology(e.name, e.code)
-
 
 # listen for errors
 for code in default_exceptions:
