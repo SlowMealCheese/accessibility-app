@@ -5,21 +5,11 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-center">To begin, enter a search</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>place_id</th>
-                <th>wheelchair</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for place in Places %}
-            <tr>
-                <td>{{ place.place_id }}</td>
-                <td>{{ place.wheelchair }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h2 class="text-center">Business Accessibility Search</h2>
+    <p class ="lead">Enter a location to find nearby businesses and their reported accessibility.</p>
+    <form class="my-2 my-lg-0" action='/' method="POST">
+        <input id="mapsearch" class="form-control mr-sm-2" type="text" placeholder="Search Address" aria-label="Search" name='searchAddress'>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
 {% endblock %}

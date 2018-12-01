@@ -69,10 +69,14 @@ def close_connection(exception):
 def index():
     if request.method=="GET":
         Places = query_db('SELECT * FROM places')
-        return render_template('index.html', Places=Places, KEY=KEY);
+        return render_template('index.html', Places=Places, KEY=KEY)
 
     else:
-        return search(request.form.get('searchAddress'));
+        return search(request.form.get('searchAddress'))
+
+@app.route("/mission", methods=["GET", "POST"])
+def mission():
+    return render_template('mission.html')
 
 @app.route("/report", methods=["GET", "POST"])
 def report():
