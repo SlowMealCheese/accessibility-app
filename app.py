@@ -65,16 +65,20 @@ def close_connection(exception):
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method=="GET":
-        Places = query_db('select * from places')
+        Places = query_db('SELECT * FROM places')
         return render_template('index.html', Places=Places, KEY=KEY);
 
     else:
         return search(request.form.get('searchAddress'));
 
-@app.route("/report", methods=["GET"])
+@app.route("/report", methods=["GET", "POST"])
 def report():
-    userType = request.args.get('userType')
-    return render_template('report.html')
+    if request.method=="GET":
+        userType = request.args.get('userType')
+        return render_template('report.html')
+    else:
+        query_db('INSERT INTO places (place_id, wheelchair) VALUES (%s, %d)' % (request.form["placeid"], int(request.form["wheelchair"])))
+        return render_template('index.html')
     
 
 def errorhandler(e):
