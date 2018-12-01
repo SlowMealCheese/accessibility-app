@@ -6,4 +6,20 @@
 
 {% block main %}
     <h1 class="text-center">To begin, enter a search</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>place_id</th>
+                <th>wheelchair</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for place in Places %}
+            <tr>
+                <td>{{ place.place_id }}</td>
+                <td>{{ place.wheelchair }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
