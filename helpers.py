@@ -36,6 +36,8 @@ def search(searchAddress):
 	if len(searchQuery)==0:
 		return render_template('index.html')
 	return render_template('searched.html', key=constants.KEY, query = searchQuery)
+	
+		
 
 def getPlaceIDs(lat, lng, query):
 	requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + constants.KEY
