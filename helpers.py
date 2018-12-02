@@ -36,7 +36,10 @@ def buildPlaces(query):
 	requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + constants.KEY
 	returnedData = requests.get(requestURL).json()
 	results = returnedData["results"]
-	token = returnedData["next_page_token"]
+	try:
+		token = returnedData["next_page_token"]
+	except:
+		return render_template('index.html')
 	placeList = list()
 	for result in results:
 		placeList.append({"name":result["name"], "address":result["formatted_address"], "placeid":result["place_id"]})
