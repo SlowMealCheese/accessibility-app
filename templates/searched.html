@@ -21,9 +21,9 @@
                         <img src="{{ restroom_img }}" style="width:1.1em;height:1.1em;">
                 </div>
                 <p class="card-text" style="margin: -.4em 2em 0 2em">
-                    Door width: {{ door_width }}
+                    Door width: {{ place["door_width"] }}
                     <br>
-                    Table height: {{ table_height }}
+                    Table height: {{ place["table_height"] }}
                 </p>
                 <form action="/report" method="get">
                     <input type="hidden" name="place_id" display="none" value="{{ place['placeid'] }}" />
