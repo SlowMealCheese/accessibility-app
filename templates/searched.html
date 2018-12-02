@@ -44,12 +44,12 @@
 					
 				
 					<p class="card-text" style="margin: -.4em 2em 0 2em">
-						{% if place["door_width"] != 23 %}
-						Door width: {{ place["door_width"] }}
+						{% if place["door_width"] and place["door_width"]|string is not none %}
+						Door width: {{ place["door_width"] }} in.
 						{% endif %}
-						{% if place["table_height"] != 23 %}
+						{% if place["table_height"] and place["door_width"]|string is not none %}
 						<br>
-						Table height: {{ place["table_height"] }}
+						Table height: {{ place["table_height"] }} in.
 						{% endif %}
 					</p>
 				
