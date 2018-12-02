@@ -5,21 +5,53 @@
 {% endblock %}
 
 {% block main %}
+    <h2>{{ place_name }} </h2>
     <form action="/report" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="place_id" placeholder="Place ID" type="text">
-            <select name="wheelchair">
-                <option disabled selected>Building Accessibility</option>
-                <option value="1">Accessible</option>
-                <option value="0">Inaccessible</option>
-            </select>
-            <select name="bathroom_access">
-                <option disabled selected>Bathroom Accessibility</option>
-                <option value="1">Accessible bathrooms</option>
-                <option value="0">Inaccessible bathrooms</option>
-            </select>
-            <input autocomplete="off" autofocus class="form-control" name="door_width" placeholder="Accessible door width (inches)" type="text">
-            <input autocomplete="off" autofocus class="form-control" name="table_height" placeholder="Accessible table height (inches)" type="text">
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        Wheelchair Accessibility
+                    </td>
+                    <td>
+                        <select name="wheelchair">
+                            <option disabled selected>Building Accessibility</option>
+                            <option value="1">Accessible</option>
+                            <option value="0">Inaccessible</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                        <td>
+                            Bathroom Accessibility
+                        </td>
+                        <td>
+                            <select name="bathroom_access">
+                                    <option disabled selected>Bathroom Accessibility</option>
+                                    <option value="1">Accessible bathrooms</option>
+                                    <option value="0">Inaccessible bathrooms</option>
+                                </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Door Width (in)
+                        </td>
+                        <td>
+                            <input autocomplete="off" autofocus class="form-control" name="door_width" placeholder="Accessible door width (inches)" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Table height
+                        </td>
+                        <td>
+                            <input autocomplete="off" autofocus class="form-control" name="table_height" placeholder="Accessible table height (inches)" type="text">
+                        </td>
+                    </tr>
+            </table>
+
+
         </div>
         <button class="btn btn-primary" type="submit">Report</button>
     </form>
