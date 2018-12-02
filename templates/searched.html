@@ -8,18 +8,32 @@
     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>
 
 	{% for place in places %}
-	<div class="card">
+	<div class="card" style="margin-bottom:1em">
 		<div class="card-body">
 			<h5 class="card-title">{{ place["name"] }}</h5>
 			<p class="card-text">{{ place["address"] }}</p>
-			<p>{{ place["placeid"] }}</p>
-		</div>
 
-		<form action="/report" method="get">
-  			<input type="hidden" name="place_id" value="{{ place['placeid'] }}" />
-  			<input type="hidden" name="place_name" value="{{ place['name'] }}" />
-  			<input type="submit" value="Report">
-		</form>
+            <div class="d-flex flex-row justify-content-center">
+                <div style="height:28px;width:20px;margin:0 10px;">
+                    <img src="{{ wheelchair_img }}" style="width:1.1em;height:1.1em;">
+                </div>
+                <div style="height:28px;width:20px;">
+                        <img src="{{ restroom_img }}" style="width:1.1em;height:1.1em;">
+                </div>
+                <p class="card-text" style="margin: -.4em 2em 0 2em">
+                    Door width: {{ door_width }}
+                    <br>
+                    Table height: {{ table_height }}
+                </p>
+                <form action="/report" method="get">
+                    <input type="hidden" name="place_id" display="none" value="{{ place['placeid'] }}" />
+                    <input type="hidden" name="place_name" display="none" value="{{ place['name'] }}" />
+                    <input type="submit" class="btn btn-primary" value="Report">
+                </form>
+            </div>
+
+        </div>
+
 	</div>
 	{% endfor %}
 
