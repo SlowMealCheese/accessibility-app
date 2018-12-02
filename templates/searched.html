@@ -7,27 +7,46 @@
 {% block main %}
     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>
 
-	{% set count = 1 %}
 	{% for place in places %}
 		<div>
-		{{ place["name"] }}
-		{{ place["address"] }}
-		<details onclick= getDetails({{count}}, {{place["placeid"]}}, {{ key }})>
-		<summary>Open Now {{ place["open"] }}</summary>
-		<p id="hours{{count}}"></p>
-		</details>
+			{{ place["name"] }}
+			{{ place["address"] }}
+			<details onclick='getDetails({{ loop.index }}, "{{place["placeid"]}}");'>
+				<summary>Open Now {{ place["open"] }}</summary>
+				<p id="hours{{ loop.index }}"></p>
+			</details>
 		</div>
-	{% set count = count + 1 %}
 	{% endfor %}
 	
-	<script>
-		function getDetails(count, id, key)
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places">
+		
+		function getDetails(count, id)
 		{
-			var requestURL="https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&key=" + key;
-			$.get(requestURL, function(details) {
+			console.log(count);
+			console.log(id);
+			var requestURL="https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id;
+			console.log(requestURL);
+			$.get("/gethours?requrl=" + requestURL, function(details) {
+			console.log("aooga")
 				var docId = 'hours' + count.toString();
 				document.getElementById(docId).innerText = details;
+				console.log(details);
 			});
+			document.getElementById(docId).removeEventListener('click',handler);
 		}
+
+		var request = {
+		placeId: id,
+		fields: ["opening_hours"]
+		};
+
+		service = new google.maps.places.PlacesService(map);
+		service.getDetails(request, callback);
+
+		function callback(place, status) {
+		  if (status == google.maps.places.PlacesServiceStatus.OK) {
+			createMarker(place);
+		  }
+}
 	</script>
 {% endblock %}

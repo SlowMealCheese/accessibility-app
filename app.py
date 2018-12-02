@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import requests
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, g
 from flask_session import Session
@@ -74,6 +75,13 @@ def index():
     else:
         return search(request.form.get('searchAddress'));
 
+@app.route("/gethours", methods=["GET"])
+def check():
+	hours = ""
+	words = requests.get(request.args.get('requrl')+"&key="+KEY).json()["result"]["opening_hours"]["weekday_text"]
+	for word in words:
+		hours = hours + word + "\n"
+	return hours
 
 @app.route("/report", methods=["GET", "POST"])
 def report():
