@@ -89,7 +89,7 @@ def report():
         query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
                  (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
                   request.form.get("door_width"), request.form.get("table_height")))
-        return redirect("/", success_message="Thank you! Your report was successfully logged!")
+        return render_template("index.html", success_message="Thank you! Your report was successfully logged!")
 
 @app.route("/nextpage")
 
