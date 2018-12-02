@@ -11,33 +11,8 @@
 		<div>
 			{{ place["name"] }}
 			{{ place["address"] }}
-			<details onclick='getDetails({{ loop.index }}, "{{place["placeid"]}}");'>
-				<summary>Open Now {{ place["open"] }}</summary>
-				<p id="hours{{ loop.index }}"></p>
-			</details>
 		</div>
 	{% endfor %}
 	
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places">
-		
-		function getDetails(count, id)
-		{
-		var request = {
-		placeId: id,
-		fields: ["opening_hours"]
-		};
-
-		service = new google.maps.places.PlacesService(map);
-		service.getDetails(request, callback);
-
-		function callback(place, status) {
-		  if (status == google.maps.places.PlacesServiceStatus.OK) {
-			createMarker(place);
-		  }
-}
-			document.getElementById(docId).removeEventListener('click',handler);
-		}
-
-		
-	</script>
+	
 {% endblock %}

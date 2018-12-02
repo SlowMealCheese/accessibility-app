@@ -71,17 +71,8 @@ def index():
     if request.method=="GET":
         Places = query_db('SELECT * FROM places')
         return render_template('index.html', Places=Places, KEY=KEY);
-
     else:
         return search(request.form.get('searchAddress'));
-
-@app.route("/gethours", methods=["GET"])
-def check():
-	hours = ""
-	words = requests.get(request.args.get('requrl')+"&key="+KEY).json()["result"]["opening_hours"]["weekday_text"]
-	for word in words:
-		hours = hours + word + "\n"
-	return hours
 
 @app.route("/report", methods=["GET", "POST"])
 def report():
