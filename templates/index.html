@@ -17,23 +17,4 @@
         <h3>{{ success_message }}</h3>
     {% endif %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>place_id</th>
-                <th>wheelchair</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for place in Places %}
-            <tr>
-                <td>{{ place.place_id }}</td>
-                <td>{{ place.wheelchair }}</td>
-                <td>{{ place.bathroom_access }}</td>
-                <td>{{ place.door_width }}</td>
-                <td>{{ place.table_height }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}

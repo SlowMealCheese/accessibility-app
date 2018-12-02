@@ -17,41 +17,45 @@
 
 				{% if place["wheelchair"] == 1 %}
 					{% set wheelchair_img = "/static/wctrue.png" %}
-					<div style="height:28px;width:20px;margin:0 10px;">
-					<img src="{{ wheelchair_img }}" style="width:2em;height:2em;">
+					<div style="height:2em;width:2em;margin:0 10px;">
+						<img src="{{ wheelchair_img }}" style="width:2em;height:2em;">
 					</div>
 				{% elif place["wheelchair"] == 0 %}
 					{% set wheelchair_img = "/static/wcfalse.png" %}
-					<div style="height:28px;width:20px;margin:0 10px;">
-					<img src="{{ wheelchair_img }}" style="width:2em;height:2em;">
+					<div style="height:2em;width:2em;margin:0 10px;">
+						<img src="{{ wheelchair_img }}" style="width:2em;height:2em;">
 					</div>
 				{% endif %}
 
 
 				{% if place["bathroom_access"] == 1 %}
 					{% set restroom_img = "/static/brtrue.png" %}
-					<div style="height:28px;width:20px;">
+					<div style="height:2em;width:2em;margin:0 10px;">
 						<img src="{{ restroom_img }}" style="width:2em;height:2em;">
 					</div>
 				{% elif place["bathroom_access"] == 0 %}
 					{% set restroom_img = "/static/brfalse.png" %}
-					<div style="height:28px;width:20px;">
+					<div style="height:2em;width:2em;margin:0 10px;">
 						<img src="{{ restroom_img }}" style="width:2em;height:2em;">
 					</div>
 				{% endif %}
 				
 
 					
-				
-					<p class="card-text" style="margin: -.4em 2em 0 2em">
+				{% if (place["door_width"] and place["door_width"]|string is not none) or (place["table_height"] and place["door_width"]|string is not none) %}
+					<div class="card-text" style="margin: -.4em 1em 0 1em">
 						{% if place["door_width"] and place["door_width"]|string is not none %}
+						<p class="door">
 						Door width: {{ place["door_width"] }} in.
+						</p>
 						{% endif %}
 						{% if place["table_height"] and place["door_width"]|string is not none %}
-						<br>
+						<p class="table">
 						Table height: {{ place["table_height"] }} in.
+						</p>
 						{% endif %}
-					</p>
+					</div>
+				{% endif %}
 				
 
                 <form action="/report" method="get">
