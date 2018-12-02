@@ -118,7 +118,7 @@ def buildPlaces(query):
 def index():
     if request.method=="GET":
         Places = query_db('SELECT * FROM places')
-        return render_template('index.html', Places=Places, KEY=KEY);
+        return render_template('index.html', Places=Places, KEY=KEY, mainpage=True);
     else:
         return search(request.form.get('searchAddress'));
 
