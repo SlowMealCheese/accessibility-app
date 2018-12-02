@@ -22,19 +22,6 @@
 		
 		function getDetails(count, id)
 		{
-			console.log(count);
-			console.log(id);
-			var requestURL="https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id;
-			console.log(requestURL);
-			$.get("/gethours?requrl=" + requestURL, function(details) {
-			console.log("aooga")
-				var docId = 'hours' + count.toString();
-				document.getElementById(docId).innerText = details;
-				console.log(details);
-			});
-			document.getElementById(docId).removeEventListener('click',handler);
-		}
-
 		var request = {
 		placeId: id,
 		fields: ["opening_hours"]
@@ -48,5 +35,9 @@
 			createMarker(place);
 		  }
 }
+			document.getElementById(docId).removeEventListener('click',handler);
+		}
+
+		
 	</script>
 {% endblock %}
