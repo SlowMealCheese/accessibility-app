@@ -85,7 +85,7 @@ def report():
         query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
                  (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
                   request.form.get("door_width"), request.form.get("table_height")))
-        return redirect("/")
+        return redirect("/", success_message="Thank you! Your report was successfully logged!")
 
 @app.route("/mission", methods=["GET", "POST"])
 def mission():
