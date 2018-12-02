@@ -1,15 +1,18 @@
 import os
 import sqlite3
+import urllib.parse
 import requests
+import json
+
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, g
 from flask_session import Session
+from functools import wraps
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from helpers import apology, search
 from constants import KEY
 
 
@@ -66,6 +69,47 @@ def close_connection(exception):
         db.close()
 
 
+# Helper functions
+
+def apology(message, code=400):
+    """Render message as an apology to user."""
+    def escape(s):
+        """
+        Escape special characters.
+
+        https://github.com/jacebrowning/memegen#special-characters
+        """
+        for old, new in [("-", "--"), (" ", "-"), ("_", "__"), ("?", "~q"),
+                         ("%", "~p"), ("#", "~h"), ("/", "~s"), ("\"", "''")]:
+            s = s.replace(old, new)
+        return s
+    return render_template("apology.html", top=code, bottom=escape(message)), code
+
+def search(searchAddress):
+    searchWords= searchAddress.split()
+    searchQuery = ''
+    for word in searchWords:
+        searchQuery = searchQuery+word+ '+'
+    searchQuery = searchQuery[:-1]
+
+    if len(searchQuery)==0:
+        return render_template('index.html')
+    return render_template('searched.html', places = buildPlaces(searchQuery), key=KEY, query=searchQuery)
+    
+def buildPlaces(query):
+    requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + KEY
+    results = requests.get(requestURL).json()["results"]
+    placeList = list()
+    for result in results:
+        q = query_db('SELECT * FROM places WHERE place_id = ?', (result["place_id"],))
+        if q:
+            q = q[0]
+            placeList.append({"name":result["name"], "address":result["formatted_address"], "placeid":result["place_id"], 
+                              "wheelchair":q["wheelchair"], "bathroom_access":q["bathroom_access"],
+                              "door_width":q["door_width"], "table_height":q["table_height"]})
+        else:
+            placeList.append({"name":result["name"], "address":result["formatted_address"], "placeid":result["place_id"]})
+    return placeList
 
 
 # Routes
