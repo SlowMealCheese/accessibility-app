@@ -144,7 +144,7 @@ def report():
             query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)',
                      (place_id, wheelchair, bathroom_access, door_width, table_height))
 
-        return render_template("index.html", success_message="Thank you! Your report was successfully logged!")
+        return render_template("index.html", success_message="Thank you! Your report was successfully logged!", mainpage=True)
 
 @app.route("/nextpage")
 
