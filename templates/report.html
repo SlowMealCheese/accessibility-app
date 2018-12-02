@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <h2>{{ place_name }} </h2>
+    <h2>{{ place_name }} - Accessibility Report </h2>
     <form action="/report" method="post">
         <div class="form-group">
             <table class="table table-striped">
@@ -51,7 +51,7 @@
                 </tr>
             </table>
         </div>
-        <input autocomplete="off" style="display:none;" name="place_id" value="{{place_id}}" type = >
+        <input autocomplete="off" style="display:none;" value="{{place_id}}" type = "hidden" name="place_id">
         <button class="btn btn-primary" type="submit">Report</button>
     </form>
 {% endblock %}
