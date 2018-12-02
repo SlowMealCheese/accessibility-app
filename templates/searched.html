@@ -35,7 +35,7 @@
 					</div>
 				{% endif %}
 					
-					
+				{% if place["door_width"] or place["table_height"] %}
 					<p class="card-text" style="margin: -.4em 2em 0 2em">
 						{% if place["door_width"] %}
 						Door width: {{ place["door_width"] }}
@@ -45,11 +45,12 @@
 						Table height: {{ place["table_height"] }}
 						{% endif %}
 					</p>
-				
+				{% endif %}
+
                 <form action="/report" method="get">
                     <input type="hidden" name="place_id" display="none" value="{{ place['placeid'] }}" />
                     <input type="hidden" name="place_name" display="none" value="{{ place['name'] }}" />
-                    <input type="submit" class="btn btn-primary" value="Report">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
             </div>
 
