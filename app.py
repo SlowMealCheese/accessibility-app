@@ -85,6 +85,9 @@ def report():
                   request.form.get("door_width"), request.form.get("table_height")))
         return redirect("/")
 
+@app.route("/nextpage")
+	
+
 def errorhandler(e):
     """Handle error"""
     return apology(e.name, e.code)
