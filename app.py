@@ -85,6 +85,10 @@ def report():
                   request.form.get("door_width"), request.form.get("table_height")))
         return redirect("/")
 
+@app.route("/mission", methods=["GET", "POST"])
+def mission():
+    return render_template('mission.html')
+
 def errorhandler(e):
     """Handle error"""
     return apology(e.name, e.code)
