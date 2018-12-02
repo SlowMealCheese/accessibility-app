@@ -8,36 +8,13 @@
     <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?key={{key}}&q={{query}}"></iframe>
 
 	{% for place in places %}
-		<div>
-			{{ place["name"] }}
-			{{ place["address"] }}
-			<details onclick='getDetails({{ loop.index }}, "{{place["placeid"]}}");'>
-				<summary>Open Now {{ place["open"] }}</summary>
-				<p id="hours{{ loop.index }}"></p>
-			</details>
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">{{ place["name"] }}</h5>
+			<p class="card-text">{{ place["address"] }}</p>
+			<p>{{ place["placeid"] }}</p>
 		</div>
+	</div>
 	{% endfor %}
-	
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{key}}&libraries=places">
-		
-		function getDetails(count, id)
-		{
-		var request = {
-		placeId: id,
-		fields: ["opening_hours"]
-		};
 
-		service = new google.maps.places.PlacesService(map);
-		service.getDetails(request, callback);
-
-		function callback(place, status) {
-		  if (status == google.maps.places.PlacesServiceStatus.OK) {
-			createMarker(place);
-		  }
-}
-			document.getElementById(docId).removeEventListener('click',handler);
-		}
-
-		
-	</script>
 {% endblock %}
