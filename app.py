@@ -78,7 +78,7 @@ def index():
 def report():
     if request.method=="GET":
         userType = request.args.get('userType')
-        return render_template('report.html')
+        return render_template('report.html', place_id=place_id)
     else:
         query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
                  (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
