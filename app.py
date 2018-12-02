@@ -118,7 +118,7 @@ def buildPlaces(query):
 def index():
     if request.method=="GET":
         Places = query_db('SELECT * FROM places')
-        return render_template('index.html', Places=Places, KEY=KEY);
+        return render_template('index.html', Places=Places, KEY=KEY, mainpage=True);
     else:
         return search(request.form.get('searchAddress'));
 
@@ -130,9 +130,20 @@ def report():
         print(request.form.get('place_id'))
         return render_template('report.html', place_name=request.args.get("place_name"), place_id=request.args.get("place_id"))
     else:
-        query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)', 
-                 (request.form.get("place_id"), request.form.get("wheelchair"), request.form.get("bathroom_access"),
-                  request.form.get("door_width"), request.form.get("table_height")))
+        place_id = request.form.get("place_id")
+        wheelchair = request.form.get("wheelchair")
+        bathroom_access = request.form.get("bathroom_access")
+        door_width = request.form.get("door_width")
+        table_height = request.form.get("table_height")
+
+        q = query_db('SELECT * FROM places WHERE place_id=?', (place_id,))
+        if (q):
+            query_db('UPDATE places SET wheelchair=?, bathroom_access=?, door_width=?, table_height=? WHERE place_id=?',
+                     (wheelchair, bathroom_access, door_width, table_height, place_id))
+        else:
+            query_db('INSERT INTO places (place_id, wheelchair, bathroom_access, door_width, table_height) VALUES (?, ?, ?, ?, ?)',
+                     (place_id, wheelchair, bathroom_access, door_width, table_height))
+
         return render_template("index.html", success_message="Thank you! Your report was successfully logged!")
 
 @app.route("/nextpage")
