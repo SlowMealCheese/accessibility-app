@@ -1,3 +1,3 @@
 # accessibility-app
 
-An app to that allows users to log and view accessibility information about locations.
+An app that allows users to log and view accessibility information about locations.
